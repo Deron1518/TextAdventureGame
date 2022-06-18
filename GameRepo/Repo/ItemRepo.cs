@@ -24,7 +24,7 @@ public class ItemRepo
     }
 
 
-    public Items GetItemsByID(int id)
+    public Items GetItemByID(int id)
     {
         foreach(Items i in _iRepo)
         {
@@ -36,18 +36,18 @@ public class ItemRepo
         return null;
     }
 
-    public bool DeleteItem(int id)
-    {
-        var item = GetItemsByID(id);
-        if(item != null)
-        {
-            _iRepo.Remove(item);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+    // public bool DeleteItem(int id)
+    // {
+    //     var item = GetItemsByID(id);
+    //     if(item != null)
+    //     {
+    //         _iRepo.Remove(item);
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
 
-    }
+    // }
 }

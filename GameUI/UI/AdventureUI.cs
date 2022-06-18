@@ -112,42 +112,51 @@ public class AdventureUI
         
         public void second()
         {
-            System.Console.WriteLine("It's starting to get dark and you start to feel small rain drops. You hear rumbles of thunder in the distance.");
-            string[] secondOptions = { "Do you stay in your covered shelter or look for food? (1 for shelter 2 for food)"};
-            
-            
-
             string secChoice;
 
-            Console.WriteLine(secText);
-            Console.WriteLine("option 1");
+            System.Console.WriteLine("It's starting to get dark and you start to feel small rain drops. You hear rumbles of thunder in the distance.");
+            System.Console.WriteLine("Do you stay in your covered shelter or look for food? (1 for shelter 2 for food");
             Console.Write("Choice: ");
-            secChoice = Console.ReadLine().ToLower();
+            Console.ReadLine().ToLower();
 
-            if (secChoice == "1" || secChoice == "shelter")
+            switch (secChoice)
             {
+                case "1":
+                case "one":
+                {
                 Console.WriteLine("You end up getting soaked from the rain. You'll need to dry your clothes soon.");
                 // System.Console.WriteLine("Press 'Enter' to continue");
                 PressAnyKey();
                 Console.Clear();
                 third();
-
-            }
-            else if (secChoice == "2" || secChoice == "food")
-            {
+                break;
+                }
+                
+                case "2":
+                case "two":
+                {
                 Console.WriteLine("Before you leave be sure to grab your flashlight out of your bag!");
                 Options();
                 Console.ReadLine();
                 gameOver();
+                break;
+                }
 
-            }
-            else
-            {
+                case "3":
+                case "three":
+                {
                 Console.WriteLine("You must reply Yes or no.");
                 Console.WriteLine("Press 'Enter' to continue.");
                 Console.ReadLine();
                 second();
+                break;
+                }
+                default:
+                    System.Console.WriteLine("Please enter a valid option");
+                    break;
             }
+           
+            
 
         }
 
