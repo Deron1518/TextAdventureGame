@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-class AdventureUI
+public class AdventureUI
     {
         private readonly ItemRepo _iRepo = new ItemRepo();
         // static void Main(string[] args)
@@ -41,7 +41,7 @@ class AdventureUI
             Console.WriteLine("Welcome To The Forest. Good Luck On Your Adventure");
             System.Console.WriteLine("You May Come Across Some Items To Pick Up...... Choose Wisely");
             System.Console.WriteLine("You still have some items in your bag that you can use. Don't waste them.");
-            Console.WriteLine("Press 'Enter' to begin.");
+            Console.WriteLine("Be sure to press 'Enter' after reading the text.");
             Console.ReadLine();
             Console.Clear();
             first();
@@ -72,6 +72,7 @@ class AdventureUI
                         Console.WriteLine("There's no path to be seen and trees as far as the eye can see.");
                         Console.WriteLine("You hear sticks breaking behind you.... you turn around slowly");
                         Console.WriteLine("It's just a deer..... PHEW");
+                        System.Console.WriteLine("Press 'Enter' to continue");
                         Console.ReadLine();
                         second();
                         break;
@@ -82,8 +83,9 @@ class AdventureUI
                         Console.WriteLine("You hear running water....");
                         Console.WriteLine("It's a creek! Now that you have a nearby water source you begin drinking from it");
                         Console.WriteLine("After drinking some water, you are no longer thirsty and continue your journey");
+                        // System.Console.WriteLine("Press 'Enter' to continue");
                         Console.ReadLine();
-                        fourth();
+                        second();
                         break;
                     }
                 case "3":
@@ -93,6 +95,7 @@ class AdventureUI
                         Console.WriteLine("After a few hours you are able to erect a sturdy shelter.");
                         System.Console.WriteLine("While building your shelter you manage to make a wooden spear for protection. Hopefully you won't have to use it");
                         Console.WriteLine("You feel a bit safer in your shelter but night is soon approaching."); ;
+                        // System.Console.WriteLine("Press 'Enter' to continue");
                         Console.ReadLine();
                         second();
                         break;
@@ -108,12 +111,12 @@ class AdventureUI
                     }
             }
         }
-        /* this section will demonstrate using random number generator and also allowing player to enter text response */
+        
         public static void second()
         {
-            Random rnd = new Random();
+            Random random = new Random();
             string[] secondOptions = { "It's starting to get dark and you start to feel small rain drops. You hear rumbles of thunder in the distance. Do you stay in your covered shelter or look for food? (1 for shelter 2 for food)"};
-            int randomNumber = rnd.Next(0, 3);
+            int randomNumber = random.Next(0, 3);
             string secText = secondOptions[randomNumber];
 
             string secChoice;
@@ -123,18 +126,19 @@ class AdventureUI
             Console.Write("Choice: ");
             secChoice = Console.ReadLine().ToLower();
 
-            if (secChoice == "1" || secChoice == "y")
+            if (secChoice == "1" || secChoice == "shelter")
             {
                 Console.WriteLine("You end up getting soaked from the rain. You'll need to dry your clothes soon.");
+                // System.Console.WriteLine("Press 'Enter' to continue");
                 Console.ReadLine();
                 Console.Clear();
                 third();
 
             }
-            else if (secChoice == "2" || secChoice == "n")
+            else if (secChoice == "2" || secChoice == "food")
             {
                 Console.WriteLine("Before you leave be sure to grab your flashlight out of your bag!");
-                GetItemsByID();
+                // GetItemsByID(id);
                 Console.ReadLine();
                 gameOver();
 
@@ -149,7 +153,6 @@ class AdventureUI
 
         }
 
-        /* this section demonstrates the use of loops 7/16/2019 */
 
         public static void third()
 
@@ -221,22 +224,90 @@ class AdventureUI
             StartScreen();
         }
 
-        private void DisplayItemsListing(Items item)
+        public void Options()
         {
-            
-        }
+            System.Console.WriteLine("Choose an option: \n" +
+            "1. View All Items In Your Backpack\n" +
+            "2. Get An Item\n" +
+            "3. Close Backpack \n" 
+            );
 
-        private void GetItemsByID()
-        {
-            Console.Clear();
-            System.Console.WriteLine("Backpack Items");
-            var item = _iRepo.ViewAllItems();
-
-            foreach(Items i in _iRepo)
+            string userInput = Console.ReadLine();
+            switch(userInput)
             {
-                DisplayItemsListing(i);
+                case "1":
+                case "one":
+                    ViewAllItems();
+                    break;
+                case "2":
+                case "two":
+                    // GetItemByID();
+                    break;
+                case "3":
+                case "three":
+                    // CloseApplication();
+                    break;
+                default:
+                    System.Console.WriteLine("Invalid input. Please choose between 1-5");
+                    break;
+                
             }
         }
+
+        public void ViewAllItems()
+        {
+            Console.Clear();
+            List<Items> ListOfItems = _iRepo.ViewAllItems();
+            foreach(Items item in ListOfItems)
+            {
+                DisplayItems(item);
+            }
+        }
+
+        private void DisplayItems(Items item)
+        {
+            System.Console.WriteLine($"Item ID: {item.ID} \n Item Name: {item.Name} \n");
+        }
+
+        public void GetItemByID(int id)
+        {
+            Console.Clear();
+            System.Console.WriteLine("--Items In Backpack--");
+            var items = _iRepo.ViewAllItems();
+            foreach(Items i in items)
+            {
+                DisplayItems(i);
+            }
+
+            try
+            {
+                System.Console.WriteLine("Please select an item by ID: \n");
+                int userInput = int.Parse(Console.ReadLine());
+                var selectedItem = _iRepo.GetItemsByID(userInput);
+                if(selectedItem != null)
+                {
+                    DisplayItems(selectedItem);
+                }
+                else
+                {
+                    System.Console.WriteLine($"Sorry the item with the ID: {userInput} does not exist.");
+                }
+            }
+            catch
+            {
+                System.Console.WriteLine("Invalid selection.");
+            }
+        }
+
+        private void PressAnyKey()
+        {
+            System.Console.WriteLine("Press any key to continue :D");
+            Console.ReadKey();
+        }
+
+
+
+       
 
 
     }
