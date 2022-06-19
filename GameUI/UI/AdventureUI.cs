@@ -178,6 +178,8 @@ public class AdventureUI
                 {
                     case "1":
                     case "one":
+                    System.Console.WriteLine("Quick get your knife!");
+                    Options();
                     Console.WriteLine("You are too slow, a large bear leaps out and claws you in the chest.");
                     Console.WriteLine("You are bleeding profusely now, and you can't move");
                     PressAnyKey();
@@ -197,24 +199,63 @@ public class AdventureUI
 
         public void gameOver()
         {
+            string redo;
+
             Console.Clear();
             Console.WriteLine("You have died.");
             Console.WriteLine("Things get wild in the forest, try to be a bit more careful!");
-            Console.WriteLine("The End?");
-            Console.ReadLine();
+            Console.WriteLine("Try again?");
+            System.Console.WriteLine("1. Retry");
+            System.Console.WriteLine("2. Quit");
+            redo = Console.ReadLine().ToLower();
             Console.Clear();
-            CloseApplication2();
+            
+            switch(redo)
+            {
+                case "1":
+                case "one":
+                {
+                    first();
+                    break;
+                }
+                case "2":
+                case "two":
+                {
+                    CloseApplication2();
+                    break;
+                }
+            }
         }
 
         public void youWin()
         {
+            string tryAgain;
+
             Console.Clear();
             Console.WriteLine("It's your lucky day");
             Console.WriteLine("A group of hikers spot you and call for help");
             Console.WriteLine("They give you food and water, you're saved.... or are you?");
-            Console.ReadLine();
+            System.Console.WriteLine("Think you can do it again?");
+            System.Console.WriteLine("1. Retry");
+            System.Console.WriteLine("2. Quit");
+            tryAgain = Console.ReadLine();
             Console.Clear();
-            CloseApplication1();
+
+            switch(tryAgain)
+            {
+                case "1":
+                case "one":
+                {
+                    first();
+                    break;
+                }
+                case "2":
+                case "two":
+                {
+                    CloseApplication1();
+                    break;
+                }
+            }
         }
 
         public void Options()
