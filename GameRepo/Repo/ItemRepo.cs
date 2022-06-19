@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 public class ItemRepo
 {
+    private int _count;
     private readonly List<Items> _iRepo = new List<Items>();
 
     public bool AddItemToBackpack(Items item)
     {
         if(item != null)
         {
+            _count++;
+            item.ID = _count;
             _iRepo.Add(item);
             return true;
         }

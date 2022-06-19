@@ -115,19 +115,21 @@ public class AdventureUI
             string secChoice;
 
             System.Console.WriteLine("It's starting to get dark and you start to feel small rain drops. You hear rumbles of thunder in the distance.");
-            System.Console.WriteLine("Do you stay in your covered shelter or look for food? (1 for shelter 2 for food");
+            System.Console.WriteLine("Do you stay in your covered shelter or look for food?");
+            System.Console.WriteLine("1. Shelter");
+            System.Console.WriteLine("2. Food");
             Console.Write("Choice: ");
-            Console.ReadLine().ToLower();
+            secChoice = Console.ReadLine().ToLower();
+            Console.Clear();
 
             switch (secChoice)
             {
                 case "1":
                 case "one":
                 {
-                Console.WriteLine("You end up getting soaked from the rain. You'll need to dry your clothes soon.");
+                Console.WriteLine("You end up getting a little wet from the rain. You're stomach is growling... hopefully you find food soon.");
                 // System.Console.WriteLine("Press 'Enter' to continue");
                 PressAnyKey();
-                Console.Clear();
                 third();
                 break;
                 }
@@ -164,50 +166,34 @@ public class AdventureUI
         public void third()
 
         {
-            int Decision;
+            string Decision;
             Console.WriteLine("A low growl can be heard amongst the trees");
             Console.WriteLine("your stomach sinks and your eyes go wide as you scan the direction of the sound");
             Console.WriteLine("Will you fight or flee? Type 1 or 2.");
             Console.Write("Decision: ");
-            int.TryParse(Console.ReadLine(), out Decision);
-            int loop = 0;
-            bool dead = false;
-            while (Decision != 1 && dead == false)
-            {
-                if (loop <= 0)
+            Decision = Console.ReadLine().ToLower();
+            Console.Clear();
+            
+            switch (Decision)
                 {
+                    case "1":
+                    case "one":
                     Console.WriteLine("You are too slow, a large bear leaps out and claws you in the chest.");
-                    Console.WriteLine("You are bleeding profusely now, will your flee or fight?");
-                    Console.Write("Decision: ");
-                    int.TryParse(Console.ReadLine(), out Decision);
-                    loop ++ ;
-                }
-                else if (loop >= 1)
-                {
+                    Console.WriteLine("You are bleeding profusely now, and you can't move");
+                    PressAnyKey();
+                    gameOver();
+                    break;
+                    
+                    case "2":
+                    case "two":
                     Console.WriteLine("The bear grabs you by your pants, you are kicking and screaming.");
-                    Console.WriteLine("Fear and adrenaline surge with in you. Fight or Flee? 1 or 2? ");
-                    Console.Write("Decision: ");
-                    int.TryParse(Console.ReadLine(), out Decision);
-                    dead = true;
-                }
-               
-            }
-            if (dead == true )
-                {
-                Console.WriteLine("You feel a sharp claw swipe your back , and jagged teeth tear at your legs");
-                Console.WriteLine("All is pain, followed by darkness.");
-                Console.ReadLine();
-                gameOver();
-                }
-            else 
-
-                {
-                Console.WriteLine("You fight with all your might, punching the bear in the nose and causing it to flee.");
-                Console.ReadLine();
-                youWin();
+                    Console.WriteLine("Fear and adrenaline surge with in you. Suddenly your pants tear, you're free! Hope you brought extra pants... ");
+                    PressAnyKey();
+                    youWin();
+                    break;
+                    
                 }
         }
-
 
         public void gameOver()
         {
@@ -272,7 +258,7 @@ public class AdventureUI
 
         private void DisplayItem(Items item)
         {
-            System.Console.WriteLine("Be sure to remember the ID for the item!");
+            // System.Console.WriteLine("Be sure to remember the ID for the item!");
             System.Console.WriteLine($"Item ID: {item.ID} \n Item Name: {item.Name} \n");
         }
 
@@ -326,7 +312,7 @@ public class AdventureUI
 
         public void PressAnyKey()
         {
-            System.Console.WriteLine("Press any key to continue :D");
+            System.Console.WriteLine("Press any key to continue");
             Console.ReadKey();
         }
 
