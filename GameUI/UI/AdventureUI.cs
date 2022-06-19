@@ -203,7 +203,7 @@ public class AdventureUI
             Console.WriteLine("The End?");
             Console.ReadLine();
             Console.Clear();
-            StartScreen();
+            CloseApplication2();
         }
 
         public void youWin()
@@ -214,7 +214,7 @@ public class AdventureUI
             Console.WriteLine("They give you food and water, you're saved.... or are you?");
             Console.ReadLine();
             Console.Clear();
-            StartScreen();
+            CloseApplication1();
         }
 
         public void Options()
